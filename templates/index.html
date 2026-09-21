@@ -57,7 +57,7 @@
 
           <div class="steps-grid">
             {% for etapa in fase.etapas %}
-              {% set status = get_step_status(fase.etapas, loop.index0) %}
+              {% set status = etapa.status %}
               {% set has_alert = (etapa.comentario and not etapa.concluido) %}
               <article class="step-card status-{{ status }} {% if has_alert %}has-alert{% endif %}">
                 <div class="step-row">
@@ -102,7 +102,7 @@
                 <p>CEP 82650-530</p>
               </div>
 
-              <a class="whatsapp-button" href="https://wa.me/5541999999999?text=Ol%C3%A1%2C%20tenho%20uma%20d%C3%BAvida%20sobre%20o%20meu%20projeto%20de%20m%C3%B3veis%20planejados." target="_blank" rel="noopener noreferrer">
+              <a class="whatsapp-button" href="https://wa.me/554184024814?text=Ref.{{ project_ref }}.%20Estou%20com%20algumas%20d%C3%BAvidas%20e%20gostaria%20de%20tirar%20essas%20d%C3%BAvidas%20com%20voc%C3%As." target="_blank" rel="noopener noreferrer">
                 <span>💬</span>
                 Tirar dúvidas no WhatsApp
               </a>
