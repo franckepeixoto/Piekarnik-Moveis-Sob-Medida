@@ -49,16 +49,22 @@ img {
   gap: 0.45rem;
 }
 
+.brand-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
 .brand-block {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  margin-bottom: 0.25rem;
+  flex-shrink: 0;
 }
 
 .project-logo {
   display: block;
-  width: min(210px, 58vw);
+  width: min(180px, 40vw);
   height: auto;
   filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.22));
 }
