@@ -183,7 +183,7 @@ def get_step_status(steps, index):
     return "proxima"
 
 
-@app.route("/")
+@app.route("/", methods=['GET', 'POST'])
 def index():
     fases = PROJETO["projeto"]["fases"]
     total_steps = sum(len(fase["etapas"]) for fase in fases)
@@ -212,5 +212,8 @@ def projeto_api():
     return jsonify(PROJETO)
 
 
+
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=False)
+    app.run()
+#if __name__ == "__main__":
+#    app.run(host="0.0.0.0", port=5000, debug=False)

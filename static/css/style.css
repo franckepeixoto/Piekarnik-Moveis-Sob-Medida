@@ -311,6 +311,60 @@ h1 {
   border: 1px solid rgba(184, 107, 80, 0.45);
 }
 
+.company-footer {
+  padding: 0 0 2rem;
+}
+
+.footer-box {
+  padding: 1.25rem 1.1rem;
+  background: rgba(28, 28, 28, 0.96);
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1rem;
+}
+
+.footer-content h3 {
+  margin: 0 0 0.75rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.footer-content p {
+  margin: 0.2rem 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.whatsapp-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  min-width: 220px;
+  padding: 0.9rem 1.1rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #25D366, #1f9d52);
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.9rem;
+  box-shadow: 0 10px 30px rgba(37, 211, 102, 0.25);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.whatsapp-button:hover {
+  transform: translateY(-2px);
+  text-decoration: none;
+  color: #ffffff;
+  box-shadow: 0 12px 26px rgba(37, 211, 102, 0.35);
+}
+
 @media (max-width: 576px) {
   .summary-top {
     align-items: flex-start;
@@ -327,5 +381,14 @@ h1 {
 
   .phase-header {
     padding-bottom: 0.7rem;
+  }
+
+  .footer-content {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .whatsapp-button {
+    width: 100%;
   }
 }
