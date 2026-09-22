@@ -49,46 +49,67 @@
           </div>
         </section>
 
+       
+        
         {% for fase in projeto.fases %}
-        <section class="phase-card card-panel mb-4">
-          <div class="phase-header">
-            <span>{{ fase.nome }}</span>
-          </div>
+          {% set fase_concluida = (fase.etapas | length > 0) and
+              (fase.etapas | selectattr('concluido') | list | length == fase.etapas | length) %}
 
-          <div class="steps-grid">
-            {% for etapa in fase.etapas %}
-              {% set status = etapa.status %}
-              {% set has_alert = (etapa.comentario and not etapa.concluido) %}
-              <article class="step-card status-{{ status }} {% if has_alert %}has-alert{% endif %}">
-                <div class="step-row">
-                  <span class="status-dot"></span>
-                  <h3>{{ etapa.nome }}</h3>
-                </div>
+          <section class="phase-card card-panel mb-4 {% if fase_concluida %}phase-complete{% endif %}">
+            <button
+              class="phase-toggle {% if fase_concluida %}is-collapsed{% endif %}"
+              type="button"
+              aria-expanded="{{ 'false' if fase_concluida else 'true' }}"
+              data-phase-toggle
+            >
+              <span class="phase-name">{{ fase.nome }}</span>
 
-                {% if etapa.comentario %}
-                <p class="step-comment">{{ etapa.comentario }}</p>
-                {% endif %}
+              <span class="phase-summary">
+                <span class="phase-status-badge {% if fase_concluida %}phase-done{% endif %}">
+                  {% if fase_concluida %}Concluída{% else %}Em andamento{% endif %}
+                </span>
+                <span class="phase-chevron">▾</span>
+              </span>
+            </button>
 
-                <div class="step-footer">
-                  {% if status == 'concluido' %}
-                    <span class="step-badge badge-success">Concluído</span>
-                  {% elif status == 'em_andamento' %}
-                    <span class="step-badge badge-warning">Em andamento</span>
-                  {% elif status == 'proxima' %}
-                    <span class="step-badge badge-next">Próxima etapa</span>
-                  {% else %}
-                    <span class="step-badge badge-next badge-danger ">Pendente</span>
-                  {% endif %}
+            <div class="phase-body {% if fase_concluida %}is-collapsed{% endif %}" data-phase-body>
+              <div class="steps-grid">
+                {% for etapa in fase.etapas %}
+                  {% set status = etapa.status %}
+                  {% set has_alert = (etapa.comentario and not etapa.concluido) %}
 
-                  {% if has_alert %}
-                    <span class="step-badge badge-attention">Atenção</span>
-                  {% endif %}
-                </div>
-              </article>
-            {% endfor %}
-          </div>
-        </section>
+                  <article class="step-card status-{{ status }} {% if has_alert %}has-alert{% endif %}">
+                    <div class="step-row">
+                      <span class="status-dot"></span>
+                      <h3>{{ etapa.nome }}</h3>
+                    </div>
+
+                    {% if etapa.comentario %}
+                      <p class="step-comment">{{ etapa.comentario }}</p>
+                    {% endif %}
+
+                    <div class="step-footer">
+                      {% if status == 'concluido' %}
+                        <span class="step-badge badge-success">Concluído</span>
+                      {% elif status == 'em_andamento' %}
+                        <span class="step-badge badge-warning">Em andamento</span>
+                      {% elif status == 'proxima' %}
+                        <span class="step-badge badge-next">Próxima etapa</span>
+                      {% else %}
+                        <span class="step-badge badge-next badge-danger">Pendente</span>
+                      {% endif %}
+
+                      {% if has_alert %}
+                        <span class="step-badge badge-attention">Atenção</span>
+                      {% endif %}
+                    </div>
+                  </article>
+                {% endfor %}
+              </div>
+            </div>
+          </section>
         {% endfor %}
+
       </main>
 
       <footer class="company-footer">
@@ -113,5 +134,25 @@
         </div>
       </footer>
     </div>
+    <script>
+  document.querySelectorAll('[data-phase-toggle]').forEach((button) => {
+    const phaseBody = button.nextElementSibling;
+    if (!phaseBody || !phaseBody.matches('[data-phase-body]')) return;
+
+    const syncState = () => {
+      const collapsed = phaseBody.classList.contains('is-collapsed');
+      phaseBody.hidden = collapsed;
+      button.setAttribute('aria-expanded', String(!collapsed));
+      button.classList.toggle('is-collapsed', collapsed);
+    };
+
+    button.addEventListener('click', () => {
+      phaseBody.classList.toggle('is-collapsed');
+      syncState();
+    });
+
+    syncState();
+  });
+</script>
   </body>
 </html>

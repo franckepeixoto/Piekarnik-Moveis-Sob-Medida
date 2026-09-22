@@ -398,3 +398,79 @@ h1 {
     width: 100%;
   }
 }
+.phase-toggle {
+  width: 100%;
+  border: none;
+  background: transparent;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0 0.2rem 0.9rem;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 0.95rem;
+  text-align: left;
+  cursor: pointer;
+}
+
+.phase-name {
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.16rem;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.phase-summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.phase-status-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  background: rgba(196, 154, 90, 0.14);
+  border: 1px solid rgba(196, 154, 90, 0.4);
+  color: #f6dfb4;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.04rem;
+  text-transform: uppercase;
+}
+
+.phase-status-badge.phase-done {
+  background: rgba(94, 159, 120, 0.14);
+  border-color: rgba(94, 159, 120, 0.45);
+  color: #d8f1e3;
+}
+
+.phase-chevron {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.2rem;
+  height: 1.2rem;
+  color: var(--muted);
+  transition: transform 0.2s ease;
+}
+
+.phase-toggle.is-collapsed .phase-chevron {
+  transform: rotate(-90deg);
+}
+
+.phase-body {
+  display: block;
+}
+
+.phase-body.is-collapsed {
+  display: none;
+}
+
+.phase-complete .phase-name {
+  color: #d8f1e3;
+}
