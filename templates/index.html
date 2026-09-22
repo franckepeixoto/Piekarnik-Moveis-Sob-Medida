@@ -76,6 +76,8 @@
                     <span class="step-badge badge-warning">Em andamento</span>
                   {% elif status == 'proxima' %}
                     <span class="step-badge badge-next">Próxima etapa</span>
+                  {% else %}
+                    <span class="step-badge badge-next badge-danger ">Pendente</span>
                   {% endif %}
 
                   {% if has_alert %}

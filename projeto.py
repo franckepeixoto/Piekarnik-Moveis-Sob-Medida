@@ -20,7 +20,7 @@ def parse_status(status_value):
     if any(token in value for token in ["proxima", "próxima", "pendente", "aguardando", "next"]):
         return "proxima"
 
-    return "proxima"
+    return value
 
 
 def build_project_from_rows(rows):
