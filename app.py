@@ -1,4 +1,6 @@
 from flask import Flask, jsonify, render_template, request
+import urllib
+import urllib.parse
 from projeto import load_project_data,calculate_project_progress,get_step_status
 app = Flask(__name__)
 
@@ -17,7 +19,7 @@ def index():
     summary = calculate_project_progress(PROJECT_DATA)
     PROJECT_DATA['summary'] = summary
     fases = PROJECT_DATA["projeto"]["fases"]
-    
+    whatsapp_msg = f"Olá! Estou com algumas dúvidas, pode me ajudar? Segue o código de referência do projeto: {PROJECT_REF}  - {PROJECT_NAME} - {summary['progress']}% concluído. Obrigado! "
     return render_template(
         "index.html",
         projeto=PROJECT_DATA["projeto"],
@@ -28,6 +30,7 @@ def index():
         total_steps=summary["total_steps"],
         is_complete=summary["is_complete"],
         get_step_status=get_step_status,
+        whatsapp_msg=urllib.parse.quote_plus(whatsapp_msg)
     )
 
 
